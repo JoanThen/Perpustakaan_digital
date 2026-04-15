@@ -1,88 +1,171 @@
-<x-guest-layout>
-    <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 relative overflow-hidden">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar — Perpustakaan Digital</title>
 
-        <!-- Background Blur Circle -->
-        <div class="absolute -top-40 -left-40 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
-        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-indigo-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-        <div class="relative max-w-md w-full px-6">
-            
-            <!-- Card -->
-            <div class="backdrop-blur-xl bg-white/70 shadow-2xl rounded-3xl p-10 border border-white/40">
+    <style>
+        :root {
+            --ink: #0d0d0d;
+            --paper: #f5f0e8;
+            --cream: #faf7f2;
+            --accent: #c8622a;
+            --muted: #8a8070;
+            --border: rgba(13,13,13,0.1);
+        }
 
-                <!-- Logo -->
-                <div class="text-center mb-8">
-                    <div class="mx-auto w-20 h-20 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-3xl flex items-center justify-center shadow-lg shadow-purple-300/40">
-                        <svg class="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
-                            </path>
-                        </svg>
-                    </div>
-                    <h2 class="mt-6 text-3xl font-bold text-gray-800 tracking-tight">
-                        Buat Akun Baru
-                    </h2>
-                    <p class="text-sm text-gray-500 mt-2">
-                        Bergabung dengan Perpustakaan Digital
-                    </p>
-                </div>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-                <!-- Form -->
-                <form method="POST" action="{{ route('register') }}" class="space-y-5">
-                    @csrf
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
 
-                    <!-- Name -->
-                    <div>
-                        <x-input-label for="name" value="Nama Lengkap" class="text-gray-700 font-medium" />
-                        <x-text-input id="name" name="name" type="text"
-                            class="mt-2 w-full rounded-xl border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
-                            required autofocus />
-                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                    </div>
+        .card {
+            width: 100%;
+            max-width: 400px;
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+        }
 
-                    <!-- Email -->
-                    <div>
-                        <x-input-label for="email" value="Email" class="text-gray-700 font-medium" />
-                        <x-text-input id="email" name="email" type="email"
-                            class="mt-2 w-full rounded-xl border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
-                            required />
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                    </div>
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
 
-                    <!-- Password -->
-                    <div>
-                        <x-input-label for="password" value="Password" class="text-gray-700 font-medium" />
-                        <x-text-input id="password" name="password" type="password"
-                            class="mt-2 w-full rounded-xl border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
-                            required />
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                    </div>
+        .card-sub {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 32px;
+        }
 
-                    <!-- Confirm -->
-                    <div>
-                        <x-input-label for="password_confirmation" value="Konfirmasi Password" class="text-gray-700 font-medium" />
-                        <x-text-input id="password_confirmation" name="password_confirmation" type="password"
-                            class="mt-2 w-full rounded-xl border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
-                            required />
-                    </div>
+        .form-group { margin-bottom: 18px; }
 
-                    <!-- Button -->
-                    <x-primary-button
-                        class="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 shadow-lg shadow-purple-300/40 transition-all duration-300 hover:scale-[1.02]">
-                        Daftar Sekarang
-                    </x-primary-button>
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 7px;
+        }
 
-                    <!-- Login -->
-                    <div class="text-center text-sm text-gray-600 mt-6">
-                        Sudah punya akun?
-                        <a href="{{ route('login') }}"
-                            class="font-semibold text-purple-600 hover:text-purple-800 transition">
-                            Login di sini
-                        </a>
-                    </div>
+        input {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 14px;
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            outline: none;
+        }
 
-                </form>
-            </div>
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(200,98,42,0.1);
+        }
+
+        .error-msg {
+            font-size: 12px;
+            color: #c0392b;
+            margin-top: 5px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 13px;
+            background: var(--ink);
+            color: var(--cream);
+            border: none;
+            border-radius: 100px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+        }
+
+        .login-link {
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 20px;
+        }
+
+        .login-link a {
+            color: var(--ink);
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px solid var(--ink);
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1 class="card-title">Daftar</h1>
+    <p class="card-sub">Buat akun baru untuk memulai.</p>
+
+    <form method="POST" action="{{ route('register') }}">
+        @csrf
+
+        <div class="form-group">
+            <label>Nama Lengkap</label>
+            <input type="text" name="name" value="{{ old('name') }}" required>
+
+            @error('name')
+                <div class="error-msg">{{ $message }}</div>
+            @enderror
         </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" value="{{ old('email') }}" required>
+
+            @error('email')
+                <div class="error-msg">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" required>
+
+            @error('password')
+                <div class="error-msg">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label>Konfirmasi Password</label>
+            <input type="password" name="password_confirmation" required>
+
+            @error('password_confirmation')
+                <div class="error-msg">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <button type="submit" class="btn">Daftar Sekarang</button>
+    </form>
+
+    <div class="login-link">
+        Sudah punya akun? <a href="{{ route('login') }}">Masuk</a>
     </div>
-</x-guest-layout>
+</div>
+
+</body>
+</html>

@@ -11,26 +11,21 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    /**
-     * Attribute yang boleh diisi mass assignment
-     */
+    const ROLE_ADMIN = 'admin';
+    const ROLE_USER = 'user';
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role',
     ];
 
-    /**
-     * Attribute yang disembunyikan saat serialize
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Casting attribute
-     */
     protected function casts(): array
     {
         return [
@@ -41,13 +36,28 @@ class User extends Authenticatable
 
     /*
     |--------------------------------------------------------------------------
-    | RELATIONSHIPS
+    | RELATIONSHIP
     |--------------------------------------------------------------------------
     */
 
-    // 1 User bisa punya banyak transaksi
     public function transaksi()
     {
         return $this->hasMany(Transaksi::class, 'user_id');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | ROLE CHECKER
+    |--------------------------------------------------------------------------
+    */
+
+    public function isAdmin()
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isUser()
+    {
+        return $this->role === self::ROLE_USER;
     }
 }

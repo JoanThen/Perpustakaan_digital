@@ -9,13 +9,14 @@ class Buku extends Model
 {
     protected $table = 'buku';
 
-    protected $fillable = [
-        'judul',
-        'pengarang',
-        'penerbit',
-        'tahun_terbit',
-        'stok'
-    ];
+   protected $fillable = [
+    'judul',
+    'pengarang',
+    'penerbit',
+    'tahun_terbit',
+    'stok',
+    'image' // ⬅️ INI YANG KURANG
+];
 
     public function transaksi()
     {

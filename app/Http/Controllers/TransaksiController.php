@@ -5,29 +5,41 @@ namespace App\Http\Controllers;
 use App\Models\Transaksi;
 use App\Models\Buku;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransaksiController extends Controller
 {
+    // USER
     public function index()
     {
-        $transaksi = Transaksi::with(['buku', 'user'])
-                        ->latest()
-                        ->get();
+        $transaksi = Transaksi::with('buku')
+            ->where('user_id', Auth::id())
+            ->latest()
+            ->get();
 
         return view('transaksi.index', compact('transaksi'));
+    }
+
+    // ADMIN
+    public function adminIndex()
+    {
+        $transaksi = Transaksi::with(['buku', 'user'])
+            ->latest()
+            ->get();
+
+        return view('admin.transaksi.index', compact('transaksi'));
     }
 
     public function create()
     {
         $buku = Buku::where('stok', '>', 0)->get();
-
         return view('transaksi.create', compact('buku'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'buku_id' => 'required'
+            'buku_id' => 'required|exists:buku,id'
         ]);
 
         $buku = Buku::findOrFail($request->buku_id);
@@ -37,7 +49,7 @@ class TransaksiController extends Controller
         }
 
         Transaksi::create([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
             'buku_id' => $buku->id,
             'tanggal_pinjam' => now(),
             'status' => 'dipinjam'
@@ -51,9 +63,14 @@ class TransaksiController extends Controller
 
     public function kembali($id)
     {
-        $transaksi = Transaksi::findOrFail($id);
+        $transaksi = Transaksi::with('buku')->findOrFail($id);
 
-        if ($transaksi->status == 'dikembalikan') {
+        // 🔐 proteksi
+if (strtolower(Auth::user()->role) !== 'admin' && $transaksi->user_id !== Auth::id()) { 
+            abort(403);
+        }
+
+        if ($transaksi->status === 'dikembalikan') {
             return back()->with('error', 'Buku sudah dikembalikan.');
         }
 
