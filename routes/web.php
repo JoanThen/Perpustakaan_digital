@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\KategoriController;
 
 use App\Models\Buku;
 use App\Models\Transaksi;
@@ -25,6 +26,7 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+
 /*
 |--------------------------------------------------------------------------
 | DASHBOARD REDIRECT
@@ -35,6 +37,7 @@ Route::middleware('auth')->get('/dashboard', function (Request $request) {
         ? redirect()->route('admin.dashboard')
         : redirect()->route('user.dashboard');
 })->name('dashboard');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -50,38 +53,72 @@ Route::middleware(['auth', 'role:admin'])
         return view('admin.dashboard', [
             'totalBuku' => Buku::count(),
             'totalDipinjam' => Transaksi::where('status', 'dipinjam')->count(),
+            'totalPending' => Transaksi::where('status', 'pending')->count(),
             'totalTransaksi' => Transaksi::count(),
             'totalTersedia' => Buku::sum('stok'),
         ]);
     })->name('dashboard');
 
+    // USER MANAGEMENT
     Route::resource('users', UserController::class)->except('show');
-    Route::resource('buku', BukuController::class)->except('show');
 
-    // ✅ ADMIN TRANSAKSI
-    Route::get('/transaksi', [TransaksiController::class, 'adminIndex'])
-        ->name('transaksi.index');
+    // BUKU
+    Route::resource('buku', BukuController::class)->except('show');
+    Route::post('buku/import', [BukuController::class, 'import'])
+    ->name('buku.import');
+    // KATEGORI
+    Route::resource('kategori', KategoriController::class);
+
+ // TRANSAKSI (ADMIN VIEW)
+Route::get('/transaksi', [TransaksiController::class, 'adminIndex'])
+    ->name('transaksi.index');
+
+// ✅ TAMBAHAN
+Route::post('/transaksi/{id}/approve',
+    [TransaksiController::class, 'approve']
+)->name('transaksi.approve');
+
+Route::post('/transaksi/{id}/tolak',
+    [TransaksiController::class, 'tolak']
+)->name('transaksi.tolak');
 });
+
 
 /*
 |--------------------------------------------------------------------------
 | USER
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'role:user'])
+Route::middleware(['auth'])
 ->prefix('user')
 ->name('user.')
 ->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('user.dashboard', [
-            'transaksiSaya' => Transaksi::where('user_id', Auth::id())->count()
-        ]);
-    })->name('dashboard');
+Route::get('/dashboard', function () {
 
+    $userId = Auth::id();
+
+    $transaksiSaya = \App\Models\Transaksi::where('user_id', $userId)->count();
+
+    $dipinjam = \App\Models\Transaksi::where('user_id', $userId)
+        ->where('status', 'dipinjam')
+        ->count();
+
+    $dikembalikan = \App\Models\Transaksi::where('user_id', $userId)
+        ->where('status', 'dikembalikan')
+        ->count();
+
+    return view('user.dashboard', compact(
+        'transaksiSaya',
+        'dipinjam',
+        'dikembalikan'
+    ));
+})->name('dashboard');
+    // CARI BUKU
     Route::get('/cari-buku', [BukuController::class, 'cari'])
-        ->name('buku.cari');
+        ->name('cari');
 });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -92,11 +129,11 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('transaksi', TransaksiController::class);
 
-    // 🔥 FIX: HARUS POST
     Route::post('/transaksi/{id}/kembali',
         [TransaksiController::class, 'kembali']
     )->name('transaksi.kembali');
 });
+
 
 /*
 |--------------------------------------------------------------------------

@@ -287,7 +287,7 @@
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
             Dashboard
         </a>
-        <a href="{{ route('user.buku.cari') }}" class="nav-link">
+       <a href="{{ route('user.cari') }}" class="nav-link">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             Cari Buku
         </a>
@@ -432,7 +432,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($transaksi as $i => $item)
+              @foreach($transaksi as $i => $item)
+@php
+    $tglPinjam = \Carbon\Carbon::parse($item->tanggal_pinjam);
+    $batas = $tglPinjam->copy()->addDays(7);
+    $isTelat = $item->status == 'dipinjam' && now()->gt($batas);
+
+    $colors = ['bc-1','bc-2','bc-3','bc-4','bc-5','bc-6','bc-7','bc-8'];
+    $color  = $colors[$i % count($colors)];
+@endphp
                         @php
                             $colors = ['bc-1','bc-2','bc-3','bc-4','bc-5','bc-6','bc-7','bc-8'];
                             $color  = $colors[$i % count($colors)];
@@ -460,10 +468,14 @@
                                     <span class="user-label">{{ $item->user->name }}</span>
                                 </div>
                             </td>
-                            <td>
-                                <div class="date-primary">{{ \Carbon\Carbon::parse($item->tanggal_pinjam)->format('d M Y') }}</div>
-                                <div class="date-secondary">{{ \Carbon\Carbon::parse($item->tanggal_pinjam)->diffForHumans() }}</div>
-                            </td>
+                           <td>
+    <div class="date-primary" style="{{ $isTelat ? 'color:#dc2626; font-weight:700;' : '' }}">
+        {{ \Carbon\Carbon::parse($item->tanggal_pinjam)->format('d M Y') }}
+    </div>
+    <div class="date-secondary" style="{{ $isTelat ? 'color:#dc2626;' : '' }}">
+        {{ $isTelat ? 'Terlambat' : \Carbon\Carbon::parse($item->tanggal_pinjam)->diffForHumans() }}
+    </div>
+</td>
                             <td>
                                 @if($item->status == 'dipinjam')
                                     <span class="badge badge-yellow">Dipinjam</span>
@@ -471,19 +483,23 @@
                                     <span class="badge badge-green">Dikembalikan</span>
                                 @endif
                             </td>
-                            <td class="center">
-                                @if($item->status == 'dipinjam')
-                                    <form action="{{ route('transaksi.kembali', $item->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        <button type="submit" class="btn-return">
-                                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg>
-                                            Kembalikan
-                                        </button>
-                                    </form>
-                                @else
-                                    <span style="color:var(--muted); font-size:12px;">—</span>
-                                @endif
-                            </td>
+                          <td class="center">
+    @if($item->status == 'pending')
+        <span style="color:orange; font-size:12px;">Menunggu approval</span>
+
+    @elseif($item->status == 'dipinjam')
+        <form action="{{ route('transaksi.kembali', $item->id) }}" method="POST">
+            @csrf
+            <button class="btn-return">Kembalikan</button>
+        </form>
+
+    @elseif($item->status == 'ditolak')
+        <span style="color:red;">Ditolak</span>
+
+    @else
+        <span class="status-done">Selesai</span>
+    @endif
+</td>
                         </tr>
                         @endforeach
                         <tr class="no-result-row" id="noResultRow" style="display:none;">
@@ -494,7 +510,25 @@
             </div>
             @endif
         </div>
-
+<div style="display:flex; justify-content:flex-end; margin:24px 0;">
+    <button 
+        onclick="window.print()" 
+        style="
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s;
+        "
+        onmouseover="this.style.background='#a8501f'; this.style.transform='translateY(-1px)'"
+        onmouseout="this.style.background='var(--accent)'; this.style.transform='translateY(0)'"
+    >
+        Ekspor PDF
+    </button>
+</div>
     </div>
 </main>
 

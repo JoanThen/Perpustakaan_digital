@@ -430,7 +430,7 @@
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
             Dashboard
         </a>
-        <a href="{{ route('user.buku.cari') }}" class="nav-link">
+       <a href="{{ route('user.cari') }}" class="nav-link">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             Cari Buku
         </a>
@@ -502,7 +502,7 @@
                     </div>
                     <div class="hero-sub">Jelajahi ribuan koleksi dan pinjam dengan mudah.</div>
                     <div class="hero-actions">
-                        <a href="{{ route('user.buku.cari') }}" class="btn-primary">
+                     <a href="{{ route('user.cari') }}" class="btn-primary">
                             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                             Jelajahi Koleksi
                         </a>
@@ -570,13 +570,13 @@
                             <div class="panel-title">Koleksi Buku</div>
                             <div class="panel-sub">Buku tersedia untuk dipinjam</div>
                         </div>
-                        <a href="{{ route('user.buku.cari') }}" style="font-size:12px; color:var(--accent); text-decoration:none; font-weight:500;">Lihat semua →</a>
+                        <a href="{{ route('user.cari') }}" style="font-size:12px; color:var(--accent); text-decoration:none; font-weight:500;">Lihat semua →</a>
                     </div>
                     <div class="panel-body">
                         @if(isset($bukuTersedia) && $bukuTersedia->count() > 0)
                         <div class="book-grid">
                             @foreach($bukuTersedia->take(4) as $buku)
-                            <a href="{{ route('user.buku.cari') }}" class="book-card">
+                            <a href="{{ route('user.cari') }}" class="book-card">
                                 <div class="book-thumb">
                                     @if($buku->image)
                                         <img src="{{ asset('storage/' . $buku->image) }}" alt="{{ $buku->judul }}">
@@ -668,7 +668,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="quick-grid">
-                            <a href="{{ route('user.buku.cari') }}" class="quick-card">
+                            <a href="{{ route('user.cari')}}" class="quick-card">
                                 <div class="quick-icon" style="background:#eff6ff; color:#3b82f6;">
                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                                 </div>

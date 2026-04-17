@@ -390,7 +390,13 @@
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
             Daftar Buku
         </a>
-
+  <a href="{{ route('admin.kategori.index') }}" class="sidebar-link">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M7 7h10M7 11h10M7 15h6M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"/>
+    </svg>
+    Kategori Buku
+</a>
         <a href="{{ route('admin.buku.create') }}" class="sidebar-link active">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
             Tambah Buku
@@ -449,6 +455,8 @@
     </div>
 
     <!-- CONTENT -->
+   
+</div>
     <div class="content">
 
         <!-- KOLOM KIRI: FORM -->
@@ -479,6 +487,7 @@
                             <div class="form-card-subtitle">Data utama identitas buku</div>
                         </div>
                     </div>
+                    
                     <div class="form-body">
 
                         <div class="form-group">
@@ -496,6 +505,14 @@
                             @error('judul')
                                 <div class="field-error">{{ $message }}</div>
                             @enderror
+                            <div style="margin-bottom:15px;">
+    <label>Kategori</label>
+  <select name="kategori_id">
+    @foreach(\App\Models\Kategori::all() as $k)
+        <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
+    @endforeach
+</select>
+</div>
                         </div>
 
                         <div class="form-group">
@@ -635,6 +652,7 @@
                                 <span class="preview-meta-key">Penerbit</span>
                                 <span class="preview-meta-val" id="previewPenerbit">—</span>
                             </div>
+                            
                             <div class="preview-meta-row">
                                 <span class="preview-meta-key">Tahun</span>
                                 <span class="preview-meta-val" id="previewTahun">—</span>
@@ -643,6 +661,30 @@
                                 <span class="preview-meta-key">Stok</span>
                                 <span class="preview-meta-val" id="previewStok">—</span>
                             </div>
+                            <div class="form-group">
+    <label class="field-label">
+        Kategori <span class="required-dot"></span>
+    </label>
+
+    <select name="kategori_id"
+        class="field-input @error('kategori_id') is-error @enderror"
+        required>
+        
+        <option value="">-- Pilih Kategori --</option>
+
+        @foreach($kategori as $k)
+            <option value="{{ $k->id }}"
+                {{ old('kategori_id') == $k->id ? 'selected' : '' }}>
+                {{ $k->nama_kategori }}
+            </option>
+        @endforeach
+
+    </select>
+
+    @error('kategori_id')
+        <div class="field-error">{{ $message }}</div>
+    @enderror
+</div>
                         </div>
                     </div>
                 </div>
@@ -671,7 +713,21 @@
                 </div>
             </div>
         </div>
+ <div class="form-card" style="margin-bottom:16px;">
+    <div class="form-body">
 
+        <form id="importForm" action="{{ route('admin.buku.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+
+            <input type="file" name="file" id="excelFile" accept=".xlsx,.xls,.csv" required>
+
+            <button type="submit" class="btn-submit" style="margin-top:10px;">
+                Import Excel
+            </button>
+
+        </form>
+
+    </div>
     </div>
 </main>
 

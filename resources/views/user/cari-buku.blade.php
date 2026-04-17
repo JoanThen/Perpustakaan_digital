@@ -428,7 +428,7 @@
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
             Dashboard
         </a>
-        <a href="{{ route('user.buku.cari') }}" class="nav-link active">
+        <a href="{{ route('user.cari') }}" class="nav-link active">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             Cari Buku
         </a>
@@ -484,7 +484,7 @@
     <div class="search-hero">
         <div class="search-hero-title">Mau baca <em>apa</em> hari ini?</div>
         <div class="search-hero-sub">Cari dari ribuan koleksi berdasarkan judul, pengarang, atau penerbit.</div>
-        <form method="GET" action="{{ route('user.buku.cari') }}" class="search-form" id="searchForm">
+        <form method="GET" action="{{ route('user.cari') }}" class="search-form" id="searchForm">
             <div class="search-input-wrap">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <input type="text" name="q" id="searchInput"
@@ -500,13 +500,24 @@
         </form>
     </div>
 
-    <!-- FILTER BAR -->
     <div class="filter-bar">
-        <span class="filter-label">Filter</span>
-        <a href="{{ route('user.buku.cari', ['q' => $query ?? '']) }}" class="filter-chip active">Semua</a>
-        <a href="{{ route('user.buku.cari', ['q' => $query ?? '', 'filter' => 'tersedia']) }}" class="filter-chip {{ request('filter') === 'tersedia' ? 'active' : '' }}">Tersedia</a>
-        <a href="{{ route('user.buku.cari', ['q' => $query ?? '', 'filter' => 'terbaru']) }}" class="filter-chip {{ request('filter') === 'terbaru' ? 'active' : '' }}">Terbaru</a>
-    </div>
+    <span class="filter-label">Filter</span>
+
+    <a href="{{ route('user.cari', ['q' => $query ?? '']) }}"
+       class="filter-chip {{ !request('filter') ? 'active' : '' }}">
+        Semua
+    </a>
+
+    <a href="{{ route('user.cari', ['q' => $query ?? '', 'filter' => 'tersedia']) }}"
+       class="filter-chip {{ request('filter') === 'tersedia' ? 'active' : '' }}">
+        Tersedia
+    </a>
+
+    <a href="{{ route('user.cari', ['q' => $query ?? '', 'filter' => 'terbaru']) }}"
+       class="filter-chip {{ request('filter') === 'terbaru' ? 'active' : '' }}">
+        Terbaru
+    </a>
+</div>
 
     <!-- CONTENT -->
     <div class="content">
@@ -516,7 +527,7 @@
         <div class="query-banner">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             Hasil pencarian untuk <strong style="margin:0 4px;">"{{ $query }}"</strong>
-            <a href="{{ route('user.buku.cari') }}">Hapus pencarian ✕</a>
+            <a href="{{ route('user.cari') }}">Hapus pencarian ✕</a>
         </div>
         @endif
 
@@ -658,7 +669,7 @@
             </div>
             <div class="empty-title">Buku tidak ditemukan</div>
             <div class="empty-sub">Coba gunakan kata kunci lain atau periksa ejaan</div>
-            <a href="{{ route('user.buku.cari') }}" class="btn-reset">Lihat semua koleksi</a>
+            <a href="{{ route('user.cari') }}" class="btn-reset">Lihat semua koleksi</a>
         </div>
         @endif
 
