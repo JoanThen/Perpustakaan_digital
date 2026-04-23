@@ -64,23 +64,37 @@ Route::middleware(['auth', 'role:admin'])
 
     // BUKU
     Route::resource('buku', BukuController::class)->except('show');
+   Route::post('/buku/preview', [BukuController::class, 'preview'])->name('buku.preview');
     Route::post('buku/import', [BukuController::class, 'import'])
+
+
     ->name('buku.import');
     // KATEGORI
     Route::resource('kategori', KategoriController::class);
 
- // TRANSAKSI (ADMIN VIEW)
+// TRANSAKSI (ADMIN VIEW)
 Route::get('/transaksi', [TransaksiController::class, 'adminIndex'])
     ->name('transaksi.index');
-
-// ✅ TAMBAHAN
+Route::post('/transaksi/{id}/approve-kembali',
+    [TransaksiController::class, 'approveKembali']
+)->name('transaksi.approveKembali');
+Route::post('/transaksi/{id}/tolak-kembali',
+    [TransaksiController::class, 'tolakKembali']
+)->name('transaksi.tolakKembali');
+// APPROVE
 Route::post('/transaksi/{id}/approve',
     [TransaksiController::class, 'approve']
 )->name('transaksi.approve');
 
+// TOLAK
 Route::post('/transaksi/{id}/tolak',
     [TransaksiController::class, 'tolak']
 )->name('transaksi.tolak');
+
+// 🔥 INI YANG KURANG
+Route::post('/transaksi/{id}/bayar-denda',
+    [TransaksiController::class, 'bayarDenda']
+)->name('transaksi.bayarDenda');
 });
 
 
@@ -127,7 +141,10 @@ Route::get('/dashboard', function () {
 */
 Route::middleware('auth')->group(function () {
 
-    Route::resource('transaksi', TransaksiController::class);
+  Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
+Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name('transaksi.create');
+Route::post('/transaksi', [TransaksiController::class, 'store'])->name('transaksi.store');
+Route::post('/transaksi/{id}/kembali', [TransaksiController::class, 'kembali'])->name('transaksi.kembali');
 
     Route::post('/transaksi/{id}/kembali',
         [TransaksiController::class, 'kembali']

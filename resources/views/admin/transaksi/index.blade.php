@@ -238,10 +238,34 @@
         /* ── CONTENT ── */
         .content { padding: 32px 36px 48px; }
 
+        /* Alert / Flash */
+        .alert {
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-success {
+            background: #f0fdf4;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
+        }
+
+        .alert-error {
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+        }
+
         /* Mini Stats */
         .mini-stats {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 14px;
             margin-bottom: 24px;
         }
@@ -274,6 +298,7 @@
         .mini-icon.blue   { background: #eff6ff; color: #3b82f6; }
         .mini-icon.orange { background: #fff7ed; color: #f97316; }
         .mini-icon.green  { background: #f0fdf4; color: #22c55e; }
+        .mini-icon.red    { background: #fef2f2; color: #ef4444; }
 
         .mini-num {
             font-family: 'Playfair Display', serif;
@@ -506,7 +531,7 @@
         .date-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
         .date-late { font-size: 11px; color: #dc2626; margin-top: 2px; font-weight: 600; }
 
-        /* Badges */
+        /* Badges — status transaksi */
         .badge {
             display: inline-flex;
             align-items: center;
@@ -525,23 +550,55 @@
             flex-shrink: 0;
         }
 
-        .badge.dipinjam  { background: #fff7ed; color: #c2410c; }
+        .badge.dipinjam       { background: #fff7ed; color: #c2410c; }
         .badge.dipinjam .badge-dot { background: #f97316; }
 
-        .badge.kembali   { background: #ecfdf5; color: #15803d; }
+        .badge.kembali        { background: #ecfdf5; color: #15803d; }
         .badge.kembali .badge-dot { background: #22c55e; }
 
-        .badge.pending   { background: #fefce8; color: #a16207; }
+        .badge.pending        { background: #fefce8; color: #a16207; }
         .badge.pending .badge-dot { background: #eab308; }
 
-        .badge.ditolak   { background: #fef2f2; color: #b91c1c; }
+        .badge.ditolak        { background: #fef2f2; color: #b91c1c; }
         .badge.ditolak .badge-dot { background: #ef4444; }
+
+        /* Badges — status denda */
+        .denda-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 600;
+            white-space: nowrap;
+            margin-top: 5px;
+        }
+
+        .denda-badge.belum-bayar {
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+        }
+
+        .denda-badge.lunas {
+            background: #f0fdf4;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
+        }
+
+        .denda-badge.tidak-ada {
+            background: rgba(13,13,13,0.04);
+            color: var(--muted);
+            border: 1px solid var(--border);
+        }
 
         /* Action buttons */
         .action-group {
             display: flex;
             gap: 6px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .btn-action {
@@ -553,7 +610,7 @@
             border-radius: 7px;
             font-family: 'DM Sans', sans-serif;
             font-size: 12px;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
             white-space: nowrap;
@@ -581,16 +638,107 @@
             transform: translateY(-1px);
         }
 
+        /* Reject form inline */
+        .reject-form {
+            display: flex;
+            align-items: center;
+        }
+
+        .reject-input-wrapper {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            background: rgba(13,13,13,0.03);
+            padding: 4px 6px;
+            border-radius: 9px;
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+
+        .reject-input-wrapper:focus-within {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
+            background: rgba(239,68,68,0.03);
+        }
+
+        .reject-input {
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 12px;
+            padding: 4px 8px;
+            min-width: 130px;
+            color: var(--ink);
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .reject-input::placeholder {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* Status indicators */
         .status-done {
             display: inline-flex;
             align-items: center;
             gap: 5px;
             font-size: 12px;
-            color: var(--muted);
-            font-weight: 500;
+            color: #15803d;
+            font-weight: 600;
         }
 
-        .status-done svg { width: 14px; height: 14px; color: #22c55e; }
+        .status-dipinjam {
+            font-size: 12px;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .status-ditolak {
+            font-size: 12px;
+            color: #b91c1c;
+            font-weight: 600;
+        }
+
+        /* Denda cell */
+        .denda-wrap { display: flex; flex-direction: column; gap: 4px; }
+
+        .denda-amount {
+            font-weight: 700;
+            color: #ea580c;
+            font-size: 13px;
+        }
+
+        .btn-bayar {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #f97316;
+            color: white;
+            border: none;
+            padding: 5px 11px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            font-family: 'DM Sans', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: fit-content;
+        }
+
+        .btn-bayar:hover {
+            background: #ea6c0a;
+            transform: translateY(-1px);
+        }
+
+        /* Alasan tolak note */
+        .reject-note {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 4px;
+            max-width: 200px;
+            line-height: 1.4;
+            font-style: italic;
+        }
 
         /* Empty state */
         .empty-state {
@@ -634,12 +782,13 @@
         .mini-card:nth-child(1) { animation-delay: 0s; }
         .mini-card:nth-child(2) { animation-delay: 0.07s; }
         .mini-card:nth-child(3) { animation-delay: 0.14s; }
+        .mini-card:nth-child(4) { animation-delay: 0.21s; }
         .filter-bar { animation: fadeUp 0.4s ease 0.15s both; }
         .table-panel { animation: fadeUp 0.5s ease 0.2s both; }
 
         /* Print */
         @media print {
-            .sidebar, .topbar, .filter-bar, .btn-export, .action-group { display: none !important; }
+            .sidebar, .topbar, .filter-bar, .btn-export, .action-group, .btn-bayar { display: none !important; }
             .main { margin-left: 0; }
             .table-panel { border: none; box-shadow: none; }
         }
@@ -734,8 +883,22 @@
     <!-- Content -->
     <div class="content">
 
-        <!-- Mini Stats -->
+        {{-- ── Flash Messages ── --}}
+        @if(session('success'))
+            <div class="alert alert-success">
+                ✔ {{ session('success') }}
+            </div>
+        @endif
+        @if(session('error'))
+            <div class="alert alert-error">
+                ✖ {{ session('error') }}
+            </div>
+        @endif
+
+        {{-- ── Mini Stats ── --}}
         <div class="mini-stats">
+
+            {{-- Total Transaksi --}}
             <div class="mini-card">
                 <div class="mini-icon blue">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
@@ -745,6 +908,8 @@
                     <div class="mini-label">Total Transaksi</div>
                 </div>
             </div>
+
+            {{-- Sedang Dipinjam --}}
             <div class="mini-card">
                 <div class="mini-icon orange">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
@@ -754,6 +919,8 @@
                     <div class="mini-label">Sedang Dipinjam</div>
                 </div>
             </div>
+
+            {{-- Sudah Dikembalikan --}}
             <div class="mini-card">
                 <div class="mini-icon green">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -763,28 +930,50 @@
                     <div class="mini-label">Sudah Dikembalikan</div>
                 </div>
             </div>
+
+            {{-- Denda Belum Dibayar --}}
+            <div class="mini-card">
+                <div class="mini-icon red">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div>
+                    <div class="mini-num">{{ $transaksi->where('status_denda','belum_bayar')->count() }}</div>
+                    <div class="mini-label">Denda Belum Bayar</div>
+                </div>
+            </div>
+
         </div>
 
-        <!-- Filter Bar -->
+        {{-- ── Filter Bar ── --}}
         <div class="filter-bar">
             <div class="search-wrap">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
                 <input type="text" class="search-input" placeholder="Cari nama user atau judul buku..." id="searchInput">
             </div>
+
             <select class="filter-select" id="statusFilter">
                 <option value="">Semua Status</option>
                 <option value="pending">Pending</option>
                 <option value="dipinjam">Dipinjam</option>
+                <option value="pending_kembali">Pending Kembali</option>
                 <option value="dikembalikan">Dikembalikan</option>
                 <option value="ditolak">Ditolak</option>
             </select>
+
+            <select class="filter-select" id="dendaFilter">
+                <option value="">Semua Denda</option>
+                <option value="belum_bayar">Belum Bayar</option>
+                <option value="lunas">Lunas</option>
+                <option value="tidak_ada">Tidak Ada</option>
+            </select>
+
             <button class="btn-export" onclick="window.print()">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
                 Ekspor PDF
             </button>
         </div>
 
-        <!-- Table Panel -->
+        {{-- ── Table Panel ── --}}
         <div class="table-panel">
             <div class="table-panel-header">
                 <div>
@@ -809,6 +998,7 @@
                                 <th>Batas Kembali</th>
                                 <th>Tgl Kembali</th>
                                 <th>Status</th>
+                                <th>Denda</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -816,9 +1006,10 @@
                             @foreach($transaksi as $item)
                                 <tr class="table-row"
                                     data-status="{{ $item->status }}"
+                                    data-denda="{{ $item->status_denda ?? 'tidak_ada' }}"
                                     data-search="{{ strtolower(($item->user->name ?? '') . ' ' . ($item->buku->judul ?? '')) }}">
 
-                                    <!-- Cover -->
+                                    {{-- Cover --}}
                                     <td>
                                         @if($item->buku && $item->buku->image)
                                             <img src="{{ asset('storage/' . $item->buku->image) }}" class="book-cover" alt="Cover">
@@ -829,33 +1020,33 @@
                                         @endif
                                     </td>
 
-                                    <!-- No -->
+                                    {{-- Nomor --}}
                                     <td style="color:var(--muted);font-weight:600;font-size:12px;">{{ $loop->iteration }}</td>
 
-                                    <!-- Peminjam -->
+                                    {{-- Peminjam --}}
                                     <td>
                                         <div class="user-cell">
                                             <div class="user-avatar">{{ strtoupper(substr($item->user->name ?? 'U', 0, 1)) }}</div>
                                             <div>
                                                 <div class="user-name">{{ $item->user->name ?? '-' }}</div>
-                                                @if(isset($item->user->email))
+                                                @if($item->user?->email)
                                                     <div class="user-email">{{ $item->user->email }}</div>
                                                 @endif
                                             </div>
                                         </div>
                                     </td>
 
-                                    <!-- Buku -->
+                                    {{-- Buku --}}
                                     <td>
                                         <div class="book-title">{{ $item->buku->judul ?? '-' }}</div>
-                                        @if(isset($item->buku->penulis))
+                                        @if($item->buku?->penulis)
                                             <div class="date-sub">{{ $item->buku->penulis }}</div>
                                         @endif
                                     </td>
 
-                                    <!-- Tgl Pinjam -->
+                                    {{-- Tanggal Pinjam --}}
                                     <td class="date-cell">
-                                        @if($item->status != 'pending')
+                                        @if($item->status !== 'pending' && $item->tanggal_pinjam)
                                             <div class="date-main">{{ \Carbon\Carbon::parse($item->tanggal_pinjam)->format('d M Y') }}</div>
                                             <div class="date-sub">{{ \Carbon\Carbon::parse($item->tanggal_pinjam)->format('H:i') }}</div>
                                         @else
@@ -863,18 +1054,18 @@
                                         @endif
                                     </td>
 
-                                    <!-- Batas Kembali -->
+                                    {{-- Batas Kembali --}}
                                     <td class="date-cell">
                                         @if($item->tanggal_kembali_rencana)
                                             @php
-                                                $isLate = now()->gt($item->tanggal_kembali_rencana) && $item->status == 'dipinjam';
-                                                $lateDays = $isLate ? now()->diffInDays($item->tanggal_kembali_rencana) : 0;
+                                                $batas  = \Carbon\Carbon::parse($item->tanggal_kembali_rencana);
+                                                $isLate = $item->status === 'dipinjam' && now()->gt($batas);
                                             @endphp
-                                            <div class="date-main" style="{{ $isLate ? 'color:#dc2626;' : '' }}">
-                                                {{ \Carbon\Carbon::parse($item->tanggal_kembali_rencana)->format('d M Y') }}
+                                            <div class="date-main" @if($isLate) style="color:#dc2626;" @endif>
+                                                {{ $batas->format('d M Y') }}
                                             </div>
                                             @if($isLate)
-                                                <div class="date-late">Terlambat {{ $lateDays }}h</div>
+                                                <div class="date-late">⚠ Terlambat</div>
                                             @else
                                                 <div class="date-sub">Batas waktu</div>
                                             @endif
@@ -883,7 +1074,7 @@
                                         @endif
                                     </td>
 
-                                    <!-- Tgl Kembali -->
+                                    {{-- Tanggal Kembali --}}
                                     <td class="date-cell">
                                         @if($item->tanggal_kembali)
                                             <div class="date-main">{{ \Carbon\Carbon::parse($item->tanggal_kembali)->format('d M Y') }}</div>
@@ -893,55 +1084,105 @@
                                         @endif
                                     </td>
 
-                                    <!-- Status -->
+                                    {{-- Status Transaksi --}}
                                     <td>
-                                        @if($item->status == 'pending')
+                                        @if($item->status === 'pending')
                                             <span class="badge pending">
                                                 <span class="badge-dot"></span>Pending
                                             </span>
-                                        @elseif($item->status == 'dipinjam')
+                                        @elseif($item->status === 'pending_kembali')
+                                            <span class="badge pending">
+                                                <span class="badge-dot"></span>Pending Kembali
+                                            </span>
+                                        @elseif($item->status === 'dipinjam')
                                             <span class="badge dipinjam">
                                                 <span class="badge-dot"></span>Dipinjam
                                             </span>
-                                        @elseif($item->status == 'dikembalikan')
+                                        @elseif($item->status === 'dikembalikan')
                                             <span class="badge kembali">
                                                 <span class="badge-dot"></span>Dikembalikan
                                             </span>
-                                        @elseif($item->status == 'ditolak')
+                                        @elseif($item->status === 'ditolak')
                                             <span class="badge ditolak">
                                                 <span class="badge-dot"></span>Ditolak
                                             </span>
+                                            @if($item->alasan_tolak)
+                                                <div class="reject-note">{{ $item->alasan_tolak }}</div>
+                                            @endif
+                                        @else
+                                            <span class="date-sub">{{ $item->status }}</span>
                                         @endif
                                     </td>
 
-                                    <!-- Aksi -->
+                                    {{-- Denda --}}
                                     <td>
-                                        @if($item->status == 'pending')
+                                        @php $statusDenda = $item->status_denda ?? 'tidak_ada'; @endphp
+
+                                        @if($statusDenda === 'belum_bayar')
+                                            <div class="denda-wrap">
+                                                <div class="denda-amount">
+                                                    Rp {{ number_format($item->denda, 0, ',', '.') }}
+                                                </div>
+                                                <span class="denda-badge belum-bayar">⚠ Belum Bayar</span>
+                                                <form action="{{ route('admin.transaksi.bayarDenda', $item->id) }}" method="POST" style="margin-top:6px;">
+                                                    @csrf
+                                                    <button type="submit" class="btn-bayar">💸 Tandai Lunas</button>
+                                                </form>
+                                            </div>
+
+                                        @elseif($statusDenda === 'lunas')
+                                            <div class="denda-wrap">
+                                                <div class="denda-amount" style="color:#15803d;">
+                                                    Rp {{ number_format($item->denda, 0, ',', '.') }}
+                                                </div>
+                                                <span class="denda-badge lunas">✔ Lunas</span>
+                                            </div>
+
+                                        @else
+                                            <span class="denda-badge tidak-ada">Tidak Ada</span>
+                                        @endif
+                                    </td>
+
+                                    {{-- Aksi --}}
+                                    <td>
+                                        @if($item->status === 'pending')
                                             <div class="action-group">
                                                 <form action="{{ route('admin.transaksi.approve', $item->id) }}" method="POST">
                                                     @csrf
-                                                    <button type="submit" class="btn-action btn-approve">
-                                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-                                                        Approve
-                                                    </button>
+                                                    <button type="submit" class="btn-action btn-approve">✔ Approve</button>
                                                 </form>
-                                                <form action="{{ route('admin.transaksi.tolak', $item->id) }}" method="POST">
+                                                <form action="{{ route('admin.transaksi.tolak', $item->id) }}" method="POST" class="reject-form">
                                                     @csrf
-                                                    <button type="submit" class="btn-action btn-reject">
-                                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
-                                                        Tolak
-                                                    </button>
+                                                    <div class="reject-input-wrapper">
+                                                        <input type="text" name="alasan_tolak" required placeholder="Alasan penolakan..." class="reject-input">
+                                                        <button type="submit" class="btn-action btn-reject">Tolak</button>
+                                                    </div>
                                                 </form>
                                             </div>
-                                        @elseif($item->status == 'dipinjam')
-                                            <span class="date-sub" style="font-style:italic;">Sedang dipinjam</span>
-                                        @elseif($item->status == 'dikembalikan')
-                                            <span class="status-done">
-                                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-                                                Selesai
-                                            </span>
-                                        @elseif($item->status == 'ditolak')
-                                            <span class="date-sub" style="color:#b91c1c;">Ditolak</span>
+
+                                        @elseif($item->status === 'pending_kembali')
+                                            <div class="action-group">
+                                                <form action="{{ route('admin.transaksi.approveKembali', $item->id) }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="btn-action btn-approve">✔ Konfirmasi</button>
+                                                </form>
+                                                <form action="{{ route('admin.transaksi.tolakKembali', $item->id) }}" method="POST" class="reject-form">
+                                                    @csrf
+                                                    <div class="reject-input-wrapper">
+                                                        <input type="text" name="alasan_tolak" required placeholder="Alasan penolakan..." class="reject-input">
+                                                        <button type="submit" class="btn-action btn-reject">Tolak</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                        @elseif($item->status === 'dipinjam')
+                                            <span class="status-dipinjam">Sedang dipinjam</span>
+
+                                        @elseif($item->status === 'dikembalikan')
+                                            <span class="status-done">✔ Selesai</span>
+
+                                        @elseif($item->status === 'ditolak')
+                                            <span class="status-ditolak">Ditolak</span>
                                         @endif
                                     </td>
 
@@ -961,11 +1202,11 @@
             </div>
 
             @if($transaksi->count())
-            <div class="pagination-wrap">
-                <div class="pagination-info" id="paginationInfo">
-                    Menampilkan {{ $transaksi->count() }} transaksi
+                <div class="pagination-wrap">
+                    <div class="pagination-info" id="paginationInfo">
+                        Menampilkan {{ $transaksi->count() }} transaksi
+                    </div>
                 </div>
-            </div>
             @endif
         </div>
 
@@ -975,18 +1216,21 @@
 <script>
     const searchInput  = document.getElementById('searchInput');
     const statusFilter = document.getElementById('statusFilter');
+    const dendaFilter  = document.getElementById('dendaFilter');
     const rows         = document.querySelectorAll('.table-row');
     const infoEl       = document.getElementById('paginationInfo');
 
     function filterTable() {
         const q      = searchInput.value.toLowerCase().trim();
         const status = statusFilter.value.toLowerCase();
+        const denda  = dendaFilter.value.toLowerCase();
         let visible  = 0;
 
         rows.forEach(row => {
-            const matchSearch = !q || row.dataset.search.includes(q);
+            const matchSearch = !q      || row.dataset.search.includes(q);
             const matchStatus = !status || row.dataset.status === status;
-            const show = matchSearch && matchStatus;
+            const matchDenda  = !denda  || row.dataset.denda  === denda;
+            const show = matchSearch && matchStatus && matchDenda;
             row.style.display = show ? '' : 'none';
             if (show) visible++;
         });
@@ -998,15 +1242,17 @@
         }
     }
 
-    searchInput.addEventListener('input', filterTable);
+    searchInput.addEventListener('input',  filterTable);
     statusFilter.addEventListener('change', filterTable);
+    dendaFilter.addEventListener('change',  filterTable);
 
-    const currentPath = window.location.pathname;
-    document.querySelectorAll('.sidebar-link').forEach(link => {
-        if (link.getAttribute('href') === currentPath) {
-            document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-        }
+    // Auto-dismiss flash messages setelah 4 detik
+    document.querySelectorAll('.alert').forEach(el => {
+        setTimeout(() => {
+            el.style.transition = 'opacity 0.5s';
+            el.style.opacity    = '0';
+            setTimeout(() => el.remove(), 500);
+        }, 4000);
     });
 </script>
 

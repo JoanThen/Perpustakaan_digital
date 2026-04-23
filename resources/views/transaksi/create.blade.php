@@ -497,20 +497,14 @@
                         </div>
      <div style="margin-top:16px;">
     <label style="font-size:12px; font-weight:500;">Tanggal Kembali</label>
-    <input 
-        type="date" 
-        name="tanggal_kembali" 
-        required
-        style="
-            width:100%;
-            margin-top:6px;
-            padding:10px;
-            border-radius:8px;
-            border:1px solid var(--border);
-            font-family:'DM Sans';
-            font-size:12px;
-        "
-    >
+<input 
+    type="date" 
+    name="tanggal_kembali_rencana"
+    min="{{ date('Y-m-d') }}"
+    max="{{ date('Y-m-d', strtotime('+7 days')) }}"
+    required
+    style="width:100%; padding:10px;"
+>
 </div>
                         @if($buku->isEmpty())
                         <div style="text-align:center; padding:32px 20px; color:var(--muted); font-size:13px;">

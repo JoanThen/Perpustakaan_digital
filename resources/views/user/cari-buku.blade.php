@@ -393,9 +393,112 @@
         }
         .btn-reset:hover { background: var(--accent); }
 
-        /* ── PAGINATION ── */
-        .pagination-wrap { margin-top: 32px; }
+       /* ── PAGINATION ── */
+.pagination-wrap {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+}
 
+.pagination {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.pagination li {
+    list-style: none;
+}
+
+.pagination li a,
+.pagination li span {
+    padding: 6px 10px; /* ini yang bikin kecil */
+    font-size: 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--paper);
+    color: var(--muted);
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.pagination li a:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.pagination li.active span {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+}
+
+.pagination li.disabled span {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+/* ── PAGINATION BUTTON STYLE ── */
+.pagination-wrap {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination {
+    display: flex;
+    gap: 8px;
+}
+
+.pagination li {
+    list-style: none;
+}
+
+.pagination li a,
+.pagination li span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--muted);
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+/* Hover */
+.pagination li a:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+/* Active (halaman sekarang) */
+.pagination li.active span {
+    background: var(--ink);
+    color: white;
+    border-color: var(--ink);
+}
+
+/* Disabled */
+.pagination li.disabled span {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Prev & Next khusus */
+.pagination li:first-child a,
+.pagination li:last-child a {
+    padding: 0 14px;
+    font-size: 12px;
+    font-weight: 500;
+}
         /* Book cover color palettes for placeholder */
         .bc-1 { background: linear-gradient(135deg, #3b4a6b, #2a3555); }
         .bc-2 { background: linear-gradient(135deg, #c8622a, #a04d1f); }
@@ -657,10 +760,9 @@
             </div>
             @endforeach
         </div>
-
-        <div class="pagination-wrap">
-            {{ $buku->appends(['q' => $query])->links() }}
-        </div>
+<div class="pagination-wrap">
+   {{ $buku->appends(['q' => $query])->links('pagination::bootstrap-4') }}
+</div>
 
         @else
         <div class="empty-state">

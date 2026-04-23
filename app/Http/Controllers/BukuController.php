@@ -116,14 +116,65 @@ class BukuController extends Controller
 
         return view('user.cari-buku', compact('buku', 'query'));
     }
-    public function import(Request $request)
+public function import(Request $request)
+{
+    $path = session('import_path');
+
+    if (!$path || !Storage::exists($path)) {
+        return back()->withErrors(['file' => 'File tidak ditemukan']);
+    }
+
+    $filePath = Storage::path($path);
+
+    $rows = Excel::toArray([], $filePath)[0] ?? [];
+
+    // 🔥 skip header (biasanya baris 0)
+    foreach ($rows as $i => $row) {
+
+        if ($i === 0) continue;
+
+        if (!isset($row[0])) continue;
+
+        \App\Models\Buku::create([
+            'judul'        => $row[0],
+            'pengarang'    => $row[1] ?? null,
+            'penerbit'     => $row[2] ?? null,
+            'tahun_terbit' => $row[3] ?? null,
+            'stok'         => $row[4] ?? 0,
+            'kategori_id'  => $row[5] ?? 1,
+        ]);
+    }
+
+    Storage::delete($path);
+    session()->forget(['preview', 'import_path']);
+
+    return back()->with('success', 'Import berhasil 📚');
+}
+public function preview(Request $request)
 {
     $request->validate([
         'file' => 'required|mimes:xlsx,xls,csv'
     ]);
 
-    Excel::import(new BukuImport, $request->file('file'));
+    $file = $request->file('file');
 
-    return redirect()->back()->with('success', 'Data buku berhasil diimport!');
+    // simpan file
+    $path = $file->store('imports');
+
+    // 🔥 GUNAKAN STORAGE PATH (INI KUNCI FIX)
+    $fullPath = Storage::path($path);
+
+    if (!file_exists($fullPath)) {
+        return back()->withErrors(['file' => 'File gagal disimpan di storage']);
+    }
+
+    $data = Excel::toArray([], $fullPath);
+
+    session([
+        'preview' => $data[0] ?? [],
+        'import_path' => $path
+    ]);
+
+    return back();
 }
 }

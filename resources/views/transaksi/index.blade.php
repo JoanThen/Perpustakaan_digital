@@ -421,16 +421,17 @@
             @else
             <div class="table-scroll">
                 <table id="mainTable">
-                    <thead>
-                        <tr>
-                            <th>Cover</th>
-                            <th>Buku</th>
-                            <th>Peminjam</th>
-                            <th>Tanggal Pinjam</th>
-                            <th>Status</th>
-                            <th class="center">Aksi</th>
-                        </tr>
-                    </thead>
+                <thead>
+    <tr>
+        <th>Cover</th>
+        <th>Buku</th>
+        <th>Peminjam</th>
+        <th>Tanggal Pinjam</th>
+        <th>Status</th>
+        <th>Denda</th> <!-- 🔥 TAMBAH INI -->
+        <th class="center">Aksi</th>
+    </tr>
+</thead>
                     <tbody>
               @foreach($transaksi as $i => $item)
 @php
@@ -483,22 +484,62 @@
                                     <span class="badge badge-green">Dikembalikan</span>
                                 @endif
                             </td>
-                          <td class="center">
-    @if($item->status == 'pending')
-        <span style="color:orange; font-size:12px;">Menunggu approval</span>
+                            <td>
+    @if($item->denda > 0)
+        <span style="color:#f97316; font-weight:600;">
+            Rp {{ number_format($item->denda, 0, ',', '.') }}
+        </span>
+    @else
+        <span style="color:var(--muted);">-</span>
+    @endif
+</td>
+         <td class="center">
+<td class="center">
 
-    @elseif($item->status == 'dipinjam')
+    {{-- STATUS DITOLAK --}}
+    @if($item->status == 'ditolak')
+        <div style="padding:6px 10px; border-radius:8px; background:#fff1f2;">
+            <div style="color:#dc2626; font-weight:600;">
+                ❌ Ditolak
+            </div>
+
+            @if(!empty($item->alasan_tolak))
+                <div style="font-size:11px; color:#6b7280; margin-top:3px;">
+                    "{{ $item->alasan_tolak }}"
+                </div>
+            @endif
+        </div>
+    @endif
+
+
+    {{-- STATUS PENDING --}}
+    @if($item->status == 'pending')
+        <div style="padding:6px 10px; border-radius:8px; background:#f3f4f6; color:#6b7280;">
+            ⏳ Menunggu persetujuan
+        </div>
+    @endif
+
+
+    {{-- STATUS DIPINJAM --}}
+    @if($item->status == 'dipinjam')
         <form action="{{ route('transaksi.kembali', $item->id) }}" method="POST">
             @csrf
-            <button class="btn-return">Kembalikan</button>
+            <button type="submit" class="btn-return">
+                Kembalikan
+            </button>
         </form>
-
-    @elseif($item->status == 'ditolak')
-        <span style="color:red;">Ditolak</span>
-
-    @else
-        <span class="status-done">Selesai</span>
     @endif
+
+
+    {{-- STATUS DIKEMBALIKAN --}}
+    @if($item->status == 'dikembalikan')
+        <div style="padding:6px 10px; border-radius:8px; background:#f0fdf4;">
+            <div style="color:#16a34a; font-weight:600;">
+                ✔ Dikembalikan
+            </div>
+        </div>
+    @endif
+
 </td>
                         </tr>
                         @endforeach

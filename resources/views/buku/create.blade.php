@@ -21,12 +21,14 @@
 
         body {
             font-family: 'DM Sans', sans-serif;
-            background: #f0ebe0;
+            background: #ede8dd;
             color: var(--ink);
             min-height: 100vh;
         }
 
-        /* ── SIDEBAR (tidak diubah) ── */
+        /* ══════════════════════════════════════
+           SIDEBAR — tidak diubah
+        ══════════════════════════════════════ */
         .sidebar {
             position: fixed;
             left: 0; top: 0; bottom: 0;
@@ -37,15 +39,16 @@
             z-index: 50;
         }
 
-        .sidebar-brand { padding: 28px 24px 24px; border-bottom: 1px solid rgba(255,255,255,0.07); }
-
+        .sidebar-brand {
+            padding: 28px 24px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
         .sidebar-brand-name {
             font-family: 'Playfair Display', serif;
             font-size: 18px; font-weight: 700;
             color: white; text-decoration: none; display: block;
         }
         .sidebar-brand-name span { color: var(--accent-light); }
-
         .sidebar-brand-sub {
             font-size: 11px; color: rgba(255,255,255,0.3);
             letter-spacing: 1px; text-transform: uppercase; margin-top: 3px;
@@ -55,7 +58,8 @@
 
         .nav-section {
             font-size: 10px; font-weight: 500; letter-spacing: 1.5px;
-            text-transform: uppercase; color: rgba(255,255,255,0.25); padding: 16px 12px 8px;
+            text-transform: uppercase; color: rgba(255,255,255,0.25);
+            padding: 16px 12px 8px;
         }
 
         .sidebar-link {
@@ -68,15 +72,18 @@
         .sidebar-link:hover { background: rgba(255,255,255,0.07); color: white; }
         .sidebar-link.active { background: var(--accent); color: white; }
 
-        .sidebar-user { padding: 16px 12px; border-top: 1px solid rgba(255,255,255,0.07); }
-        .sidebar-user-info { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-
+        .sidebar-user {
+            padding: 16px 12px;
+            border-top: 1px solid rgba(255,255,255,0.07);
+        }
+        .sidebar-user-info {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+        }
         .avatar {
             width: 34px; height: 34px; background: var(--accent);
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             font-size: 13px; font-weight: 700; color: white; flex-shrink: 0;
         }
-
         .sidebar-user-name { font-size: 13px; font-weight: 500; color: white; line-height: 1.2; }
         .sidebar-user-role { font-size: 11px; color: rgba(255,255,255,0.35); }
 
@@ -89,9 +96,15 @@
             gap: 6px; transition: all 0.2s;
         }
         .btn-logout svg { width: 14px; height: 14px; }
-        .btn-logout:hover { background: rgba(200,98,42,0.2); color: var(--accent-light); border-color: rgba(200,98,42,0.3); }
+        .btn-logout:hover {
+            background: rgba(200,98,42,0.2);
+            color: var(--accent-light);
+            border-color: rgba(200,98,42,0.3);
+        }
 
-        /* ── MAIN ── */
+        /* ══════════════════════════════════════
+           MAIN LAYOUT
+        ══════════════════════════════════════ */
         .main { margin-left: var(--sidebar-w); min-height: 100vh; }
 
         /* ── TOPBAR ── */
@@ -103,15 +116,12 @@
             height: 72px;
             position: sticky; top: 0; z-index: 40;
         }
-
         .topbar-left { display: flex; align-items: center; gap: 14px; }
-
         .topbar-icon {
             width: 40px; height: 40px; background: var(--ink);
             border-radius: 10px; display: flex; align-items: center; justify-content: center;
         }
         .topbar-icon svg { width: 18px; height: 18px; stroke: white; }
-
         .topbar-title {
             font-family: 'Playfair Display', serif;
             font-size: 22px; font-weight: 900; letter-spacing: -0.6px; line-height: 1.1;
@@ -120,185 +130,117 @@
 
         .btn-back {
             display: inline-flex; align-items: center; gap: 6px;
-            padding: 8px 16px; background: none;
+            padding: 8px 18px; background: none;
             border: 1px solid var(--border); border-radius: 100px;
             font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
             color: var(--muted); text-decoration: none; transition: all 0.2s;
         }
         .btn-back:hover { border-color: var(--ink); color: var(--ink); }
 
-        /* ── CONTENT ── */
-        .content {
-            padding: 36px;
-            display: grid;
-            grid-template-columns: 1fr 340px;
-            gap: 24px;
-            align-items: start;
-            max-width: 1000px;
-        }
+        /* ── CONTENT WRAPPER ── */
+        .content-wrapper { padding: 32px 36px; }
 
-        /* ── FORM CARD ── */
-        .form-card {
+        /* ── IMPORT STRIP ── */
+        .import-strip {
             background: var(--paper);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 2px 20px rgba(13,13,13,0.04);
+            border-radius: 14px;
+            padding: 16px 22px;
+            display: flex; align-items: center; justify-content: space-between; gap: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 16px rgba(13,13,13,0.04);
         }
-
-        .form-card-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid var(--border);
-            background: white;
-            display: flex; align-items: center; gap: 10px;
-        }
-
-        .form-card-header-icon {
-            width: 32px; height: 32px;
-            background: var(--cream);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .form-card-header-icon svg { width: 15px; height: 15px; stroke: var(--muted); }
-
-        .form-card-title { font-size: 13px; font-weight: 500; color: var(--ink); }
-        .form-card-subtitle { font-size: 11px; color: var(--muted); margin-top: 1px; }
-
-        .form-body { padding: 24px; }
-
-        /* ── FORM ELEMENTS ── */
-        .form-group { margin-bottom: 18px; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
-
-        .field-label {
-            display: flex; align-items: center; gap: 5px;
-            font-size: 11px; font-weight: 500;
-            letter-spacing: 0.8px; text-transform: uppercase;
-            color: var(--muted); margin-bottom: 7px;
-        }
-
-        .required-dot {
-            width: 5px; height: 5px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .field-input {
-            width: 100%;
-            padding: 11px 14px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 13px; color: var(--ink);
-            background: var(--cream);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            outline: none;
-            transition: all 0.2s;
-        }
-        .field-input::placeholder { color: rgba(138,128,112,0.5); }
-        .field-input:focus {
-            border-color: var(--accent);
-            background: white;
-            box-shadow: 0 0 0 3px rgba(200,98,42,0.08);
-        }
-        .field-input.is-error { border-color: #dc2626; box-shadow: 0 0 0 3px rgba(220,38,38,0.08); }
-
-        .field-hint { font-size: 11px; color: var(--muted); margin-top: 5px; }
-        .field-error { font-size: 11px; color: #dc2626; margin-top: 5px; }
-
-        /* ── UPLOAD COVER ── */
-        .upload-zone {
-            border: 1.5px dashed var(--border);
-            border-radius: 12px;
-            padding: 28px 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            position: relative;
-            background: var(--cream);
-        }
-        .upload-zone:hover { border-color: var(--accent); background: rgba(200,98,42,0.03); }
-        .upload-zone.has-file { border-color: #16a34a; background: #f0fdf4; }
-        .upload-zone input[type="file"] {
-            position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
-        }
-        .upload-icon {
-            width: 44px; height: 44px;
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 10px;
-        }
-        .upload-icon svg { width: 20px; height: 20px; stroke: var(--muted); }
-        .upload-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
-        .upload-sub { font-size: 11px; color: var(--muted); }
-        .upload-badge {
-            display: inline-flex; align-items: center; gap: 4px;
-            background: #f0fdf4; color: #15803d;
-            border: 1px solid #bbf7d0;
-            padding: 3px 10px; border-radius: 100px;
-            font-size: 11px; font-weight: 500;
-            margin-top: 8px;
-        }
-
-        /* ── PREVIEW CARD (sidebar kanan) ── */
-        .preview-card {
-            background: var(--paper);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 2px 20px rgba(13,13,13,0.04);
-            position: sticky;
-            top: 100px;
-        }
-
-        .preview-card-header {
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border);
-            background: white;
-        }
-        .preview-card-title { font-size: 12px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; }
-
-        .preview-book {
-            padding: 24px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .preview-cover {
-            width: 110px; height: 150px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #e8e0d4 0%, #d4c8b8 100%);
-            border: 1px solid var(--border);
-            display: flex; align-items: center; justify-content: center;
-            overflow: hidden;
-            box-shadow: 4px 6px 20px rgba(13,13,13,0.12);
+        .import-strip-left { display: flex; align-items: center; gap: 12px; }
+        .import-icon {
+            width: 40px; height: 40px;
+            background: #f0fdf4; border: 1px solid #bbf7d0;
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
             flex-shrink: 0;
         }
-        .preview-cover svg { width: 36px; height: 36px; stroke: var(--muted); opacity: 0.4; }
-        .preview-cover img { width: 100%; height: 100%; object-fit: cover; }
+        .import-icon svg { width: 18px; height: 18px; stroke: #15803d; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .import-label { font-size: 13px; font-weight: 500; color: var(--ink); }
+        .import-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+        .import-actions { display: flex; align-items: center; gap: 10px; }
 
-        .preview-info { text-align: center; width: 100%; }
-        .preview-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 15px; font-weight: 700; color: var(--ink);
-            line-height: 1.3; margin-bottom: 4px;
+        .file-chip-label {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--cream); border: 1px solid var(--border); border-radius: 8px;
+            padding: 7px 14px; font-size: 12px; font-weight: 500; color: var(--muted);
+            cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif;
         }
-        .preview-author { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+        .file-chip-label svg { width: 13px; height: 13px; stroke: var(--muted); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .file-chip-label:hover { border-color: var(--accent); color: var(--accent); }
+        .file-chip-label:hover svg { stroke: var(--accent); }
+        .file-chip-label input[type="file"] { display: none; }
 
-        .preview-meta {
-            width: 100%;
+        .btn-import {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 8px 18px; background: #15803d; color: white;
+            border: none; border-radius: 100px;
+            font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .btn-import svg { width: 13px; height: 13px; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .btn-import:hover { background: #166534; }
+
+        /* ── PREVIEW EXCEL ── */
+        .excel-preview {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 16px rgba(13,13,13,0.04);
+        }
+        .excel-preview-head {
+            padding: 14px 22px;
+            border-bottom: 1px solid var(--border);
+            background: white;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .excel-preview-title { font-size: 13px; font-weight: 500; color: var(--ink); }
+        .excel-preview-sub { font-size: 11px; color: var(--muted); }
+        .excel-preview-body { padding: 20px 22px; overflow-x: auto; }
+        .excel-table {
+            width: 100%; border-collapse: collapse;
+            font-size: 12px; color: var(--ink);
+        }
+        .excel-table th {
+            background: var(--ink); color: white;
+            padding: 9px 14px; text-align: left;
+            font-size: 11px; font-weight: 500; letter-spacing: 0.3px;
+        }
+        .excel-table th:first-child { border-radius: 8px 0 0 0; }
+        .excel-table th:last-child  { border-radius: 0 8px 0 0; }
+        .excel-table td {
+            padding: 9px 14px; border-bottom: 1px solid var(--border);
+            color: var(--ink);
+        }
+        .excel-table tr:last-child td { border-bottom: none; }
+        .excel-table tr:hover td { background: rgba(200,98,42,0.03); }
+        .excel-preview-foot {
+            padding: 14px 22px;
             border-top: 1px solid var(--border);
-            padding-top: 14px;
-            display: flex; flex-direction: column; gap: 8px;
+            background: var(--cream);
+            display: flex; justify-content: flex-end;
         }
-        .preview-meta-row { display: flex; justify-content: space-between; align-items: center; }
-        .preview-meta-key { font-size: 11px; color: var(--muted); }
-        .preview-meta-val { font-size: 12px; font-weight: 500; color: var(--ink); }
+        .btn-save-import {
+            display: inline-flex; align-items: center; gap: 7px;
+            padding: 9px 22px; background: var(--ink); color: var(--cream);
+            border: none; border-radius: 100px;
+            font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .btn-save-import svg { width: 14px; height: 14px; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .btn-save-import:hover { background: var(--accent); box-shadow: 0 6px 20px rgba(200,98,42,0.28); }
+
+        /* ── GRID ── */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 24px;
+            align-items: start;
+        }
 
         /* ── ERROR BOX ── */
         .error-box {
@@ -307,71 +249,215 @@
             border: 1px solid #fecaca;
             border-left: 3px solid #dc2626;
             color: #dc2626;
-            padding: 12px 16px;
-            border-radius: 10px;
-            font-size: 13px;
-            margin-bottom: 20px;
+            padding: 12px 16px; border-radius: 10px;
+            font-size: 13px; margin-bottom: 20px;
         }
-        .error-box svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; }
+        .error-box svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; fill: none; stroke: #dc2626; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
         .error-box ul { list-style: disc; padding-left: 16px; }
         .error-box li { margin-bottom: 2px; }
 
-        /* ── FORM ACTIONS ── */
-        .form-actions {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 16px 24px;
-            border-top: 1px solid var(--border);
-            background: var(--cream);
-        }
+        /* ── FORM CARDS ── */
+        .form-col { display: flex; flex-direction: column; gap: 20px; }
 
-        .btn-cancel {
-            display: inline-flex; align-items: center; gap: 6px;
-            padding: 9px 18px; background: none;
-            border: 1px solid var(--border); border-radius: 100px;
-            font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
-            color: var(--muted); text-decoration: none; transition: all 0.2s;
-        }
-        .btn-cancel:hover { border-color: var(--ink); color: var(--ink); }
-
-        .btn-submit {
-            display: inline-flex; align-items: center; gap: 7px;
-            padding: 9px 24px;
-            background: var(--ink); color: var(--cream);
-            border: none; border-radius: 100px;
-            font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
-            cursor: pointer; transition: all 0.2s;
-        }
-        .btn-submit:hover { background: var(--accent); box-shadow: 0 6px 20px rgba(200,98,42,0.28); }
-        .btn-submit svg { width: 14px; height: 14px; }
-
-        /* ── TIPS CARD ── */
-        .tips-card {
+        .fcard {
             background: var(--paper);
             border: 1px solid var(--border);
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 2px 20px rgba(13,13,13,0.04);
-            margin-top: 16px;
         }
-        .tips-header {
-            padding: 14px 20px;
+        .fcard-head {
+            padding: 18px 24px;
             border-bottom: 1px solid var(--border);
             background: white;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .fcard-head-icon {
+            width: 32px; height: 32px;
+            background: var(--cream); border: 1px solid var(--border);
+            border-radius: 8px; display: flex; align-items: center; justify-content: center;
+        }
+        .fcard-head-icon svg { width: 15px; height: 15px; stroke: var(--muted); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .fcard-title { font-size: 13px; font-weight: 500; color: var(--ink); }
+        .fcard-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+        .fcard-body { padding: 24px; }
+
+        /* ── FORM ELEMENTS ── */
+        .fgroup { margin-bottom: 16px; }
+        .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+        .frow > div { margin-bottom: 0; }
+
+        .field-label {
+            display: flex; align-items: center; gap: 5px;
+            font-size: 11px; font-weight: 500;
+            letter-spacing: 0.8px; text-transform: uppercase;
+            color: var(--muted); margin-bottom: 7px;
+        }
+        .req-dot {
+            width: 5px; height: 5px;
+            background: var(--accent); border-radius: 50%; display: inline-block;
+        }
+
+        .field-input, .field-select {
+            width: 100%; padding: 11px 14px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px; color: var(--ink);
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            outline: none; transition: all 0.2s;
+            appearance: none; -webkit-appearance: none;
+        }
+        .field-input::placeholder { color: rgba(138,128,112,0.45); }
+        .field-input:focus, .field-select:focus {
+            border-color: var(--accent);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(200,98,42,0.08);
+        }
+        .field-input.is-error { border-color: #dc2626; box-shadow: 0 0 0 3px rgba(220,38,38,0.08); }
+        .field-select.is-error { border-color: #dc2626; box-shadow: 0 0 0 3px rgba(220,38,38,0.08); }
+
+        .field-hint  { font-size: 11px; color: var(--muted); margin-top: 5px; }
+        .field-error { font-size: 11px; color: #dc2626; margin-top: 5px; }
+
+        .field-divider { height: 1px; background: var(--border); margin: 4px 0 18px; }
+
+        /* SELECT arrow */
+        .select-wrap { position: relative; }
+        .select-wrap::after {
+            content: '';
+            position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+            width: 0; height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 5px solid var(--muted);
+            pointer-events: none;
+        }
+
+        /* ── UPLOAD ZONE ── */
+        .upload-zone {
+            border: 1.5px dashed var(--border); border-radius: 12px;
+            padding: 28px 20px; text-align: center; cursor: pointer;
+            transition: all 0.2s; position: relative; background: var(--cream);
+        }
+        .upload-zone:hover { border-color: var(--accent); background: rgba(200,98,42,0.03); }
+        .upload-zone.has-file { border-color: #16a34a; background: #f0fdf4; }
+        .upload-zone input[type="file"] {
+            position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+        }
+        .upload-icon {
+            width: 44px; height: 44px; background: white;
+            border: 1px solid var(--border); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 10px;
+        }
+        .upload-icon svg { width: 20px; height: 20px; stroke: var(--muted); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .upload-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+        .upload-sub   { font-size: 11px; color: var(--muted); }
+        .upload-badge {
+            display: inline-flex; align-items: center; gap: 4px;
+            background: #f0fdf4; color: #15803d;
+            border: 1px solid #bbf7d0;
+            padding: 3px 10px; border-radius: 100px;
+            font-size: 11px; font-weight: 500; margin-top: 8px;
+        }
+
+        /* ── FORM ACTIONS ── */
+        .fcard-foot {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 16px 24px;
+            border-top: 1px solid var(--border);
+            background: var(--cream);
+        }
+        .btn-cancel {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 9px 18px; background: none;
+            border: 1px solid var(--border); border-radius: 100px;
+            font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+            color: var(--muted); text-decoration: none; transition: all 0.2s; cursor: pointer;
+        }
+        .btn-cancel:hover { border-color: var(--ink); color: var(--ink); }
+
+        .btn-submit {
+            display: inline-flex; align-items: center; gap: 7px;
+            padding: 9px 24px; background: var(--ink); color: var(--cream);
+            border: none; border-radius: 100px;
+            font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .btn-submit svg { width: 14px; height: 14px; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+        .btn-submit:hover { background: var(--accent); box-shadow: 0 6px 20px rgba(200,98,42,0.28); }
+
+        /* ── RIGHT COLUMN ── */
+        .right-col { display: flex; flex-direction: column; gap: 16px; }
+
+        /* ── PREVIEW CARD ── */
+        .preview-card {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-radius: 16px; overflow: hidden;
+            box-shadow: 0 2px 20px rgba(13,13,13,0.04);
+            position: sticky; top: 90px;
+        }
+        .preview-head {
+            padding: 16px 20px; border-bottom: 1px solid var(--border); background: white;
+        }
+        .preview-label { font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; }
+
+        .preview-body {
+            padding: 24px 20px;
+            display: flex; flex-direction: column; align-items: center; gap: 16px;
+        }
+        .book-cover {
+            width: 100px; height: 136px; border-radius: 8px;
+            background: linear-gradient(135deg, #e8e0d4, #d4c8b8);
+            border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; flex-shrink: 0;
+            box-shadow: 4px 6px 20px rgba(13,13,13,0.12);
+        }
+        .book-cover svg { width: 32px; height: 32px; stroke: var(--muted); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: 0.4; }
+        .book-cover img { width: 100%; height: 100%; object-fit: cover; }
+
+        .preview-info { text-align: center; width: 100%; }
+        .preview-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.3; margin-bottom: 4px;
+        }
+        .preview-author { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+
+        .preview-meta {
+            width: 100%; border-top: 1px solid var(--border); padding-top: 14px;
+            display: flex; flex-direction: column; gap: 9px;
+        }
+        .pmeta-row { display: flex; justify-content: space-between; align-items: center; }
+        .pmeta-key { font-size: 11px; color: var(--muted); }
+        .pmeta-val { font-size: 12px; font-weight: 500; color: var(--ink); }
+
+        /* ── TIPS CARD ── */
+        .tips-card {
+            background: var(--paper);
+            border: 1px solid var(--border);
+            border-radius: 16px; overflow: hidden;
+            box-shadow: 0 2px 20px rgba(13,13,13,0.04);
+        }
+        .tips-head {
+            padding: 14px 20px; border-bottom: 1px solid var(--border); background: white;
             font-size: 11px; font-weight: 500; color: var(--muted);
             text-transform: uppercase; letter-spacing: 0.8px;
         }
         .tips-body { padding: 16px 20px; display: flex; flex-direction: column; gap: 10px; }
         .tip-item { display: flex; align-items: flex-start; gap: 8px; }
-        .tip-dot {
-            width: 5px; height: 5px; background: var(--accent);
-            border-radius: 50%; margin-top: 5px; flex-shrink: 0;
-        }
+        .tip-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
         .tip-text { font-size: 12px; color: var(--muted); line-height: 1.5; }
     </style>
 </head>
 <body>
 
-<!-- SIDEBAR (tidak diubah) -->
+<!-- ══════════════════════════════════════
+     SIDEBAR — tidak diubah
+══════════════════════════════════════ -->
 <aside class="sidebar">
     <div class="sidebar-brand">
         <a href="{{ route('home') }}" class="sidebar-brand-name">Perpustakaan<span>.</span></a>
@@ -390,13 +476,12 @@
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
             Daftar Buku
         </a>
-  <a href="{{ route('admin.kategori.index') }}" class="sidebar-link">
-    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-              d="M7 7h10M7 11h10M7 15h6M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"/>
-    </svg>
-    Kategori Buku
-</a>
+
+        <a href="{{ route('admin.kategori.index') }}" class="sidebar-link">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h10M7 11h10M7 15h6M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"/></svg>
+            Kategori Buku
+        </a>
+
         <a href="{{ route('admin.buku.create') }}" class="sidebar-link active">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
             Tambah Buku
@@ -412,9 +497,7 @@
         <div class="nav-section">Lainnya</div>
 
         <a href="{{ route('admin.transaksi.index') }}" class="sidebar-link">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
-            </svg>
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
             Laporan
         </a>
     </nav>
@@ -437,7 +520,9 @@
     </div>
 </aside>
 
-<!-- MAIN -->
+<!-- ══════════════════════════════════════
+     MAIN
+══════════════════════════════════════ -->
 <main class="main">
 
     <!-- TOPBAR -->
@@ -454,45 +539,107 @@
         <a href="{{ route('admin.buku.index') }}" class="btn-back">← Kembali</a>
     </div>
 
-    <!-- CONTENT -->
-   
-</div>
-    <div class="content">
+    <!-- CONTENT WRAPPER -->
+    <div class="content-wrapper">
 
-        <!-- KOLOM KIRI: FORM -->
-        <div>
-
-            @if($errors->any())
-            <div class="error-box">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+        <!-- ── IMPORT EXCEL STRIP ── -->
+        <div class="import-strip">
+            <div class="import-strip-left">
+                <div class="import-icon">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+                </div>
+                <div>
+                    <div class="import-label">Import via Excel</div>
+                    <div class="import-sub">Upload file .xlsx, .xls, atau .csv untuk import data massal</div>
+                </div>
             </div>
-            @endif
+            <form action="{{ route('admin.buku.preview') }}" method="POST" enctype="multipart/form-data" class="import-actions">
+                @csrf
+                <label class="file-chip-label">
+                    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                    <span id="importFileName">Pilih File</span>
+                    <input type="file" name="file" id="importFileInput" accept=".xlsx,.xls,.csv" required>
+                </label>
+                <button type="submit" class="btn-import">
+                    <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                    Preview
+                </button>
+            </form>
+        </div>
 
-            <form action="{{ route('admin.buku.store') }}" method="POST" enctype="multipart/form-data" id="bukuForm">
+        <!-- ── PREVIEW EXCEL (muncul jika ada session 'preview') ── -->
+        @if(session('preview'))
+        <div class="excel-preview">
+            <div class="excel-preview-head">
+                <div>
+                    <div class="excel-preview-title">Preview Data Excel</div>
+                    <div class="excel-preview-sub">Periksa data sebelum disimpan ke database</div>
+                </div>
+            </div>
+            <div class="excel-preview-body">
+                <table class="excel-table">
+                    @foreach(session('preview') as $i => $row)
+                        <tr>
+                            @foreach($row as $cell)
+                                @if($i == 0)
+                                    <th>{{ $cell }}</th>
+                                @else
+                                    <td>{{ $cell }}</td>
+                                @endif
+                            @endforeach
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
+            <div class="excel-preview-foot">
+                <form action="{{ route('admin.buku.import') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn-save-import">
+                        <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                        Simpan ke Database
+                    </button>
+                </form>
+            </div>
+        </div>
+        @endif
+
+        <!-- ── CONTENT GRID ── -->
+        <div class="content-grid">
+
+            <!-- KOLOM KIRI: FORM -->
+            <div class="form-col">
+
+                @if($errors->any())
+                <div class="error-box">
+                    <svg viewBox="0 0 24 24"><path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
+                <form action="{{ route('admin.buku.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <!-- Card: Informasi Buku -->
-                <div class="form-card" style="margin-bottom: 16px;">
-                    <div class="form-card-header">
-                        <div class="form-card-header-icon">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div class="fcard" style="margin-bottom: 20px;">
+                    <div class="fcard-head">
+                        <div class="fcard-head-icon">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
                         </div>
                         <div>
-                            <div class="form-card-title">Informasi Buku</div>
-                            <div class="form-card-subtitle">Data utama identitas buku</div>
+                            <div class="fcard-title">Informasi Buku</div>
+                            <div class="fcard-sub">Data utama identitas buku</div>
                         </div>
                     </div>
-                    
-                    <div class="form-body">
 
-                        <div class="form-group">
-                            <label class="field-label">
-                                Judul Buku <span class="required-dot"></span>
+                    <div class="fcard-body">
+
+                        <div class="fgroup">
+                            <label class="field-label" for="judul">
+                                Judul Buku <span class="req-dot"></span>
                             </label>
                             <input
                                 type="text"
@@ -505,19 +652,36 @@
                             @error('judul')
                                 <div class="field-error">{{ $message }}</div>
                             @enderror
-                            <div style="margin-bottom:15px;">
-    <label>Kategori</label>
-  <select name="kategori_id">
-    @foreach(\App\Models\Kategori::all() as $k)
-        <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
-    @endforeach
-</select>
-</div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="field-label">
-                                Pengarang <span class="required-dot"></span>
+                        <div class="fgroup">
+                            <label class="field-label" for="kategori_id">
+                                Kategori <span class="req-dot"></span>
+                            </label>
+                            <div class="select-wrap">
+                                <select
+                                    id="kategori_id"
+                                    name="kategori_id"
+                                    class="field-select @error('kategori_id') is-error @enderror"
+                                    required>
+                                    <option value="">-- Pilih Kategori --</option>
+                                    @foreach($kategori as $k)
+                                        <option value="{{ $k->id }}" {{ old('kategori_id') == $k->id ? 'selected' : '' }}>
+                                            {{ $k->nama_kategori }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @error('kategori_id')
+                                <div class="field-error">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="field-divider"></div>
+
+                        <div class="fgroup">
+                            <label class="field-label" for="pengarang">
+                                Pengarang <span class="req-dot"></span>
                             </label>
                             <input
                                 type="text"
@@ -532,9 +696,9 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
-                            <label class="field-label">
-                                Penerbit <span class="required-dot"></span>
+                        <div class="fgroup">
+                            <label class="field-label" for="penerbit">
+                                Penerbit <span class="req-dot"></span>
                             </label>
                             <input
                                 type="text"
@@ -549,10 +713,10 @@
                             @enderror
                         </div>
 
-                        <div class="form-row">
+                        <div class="frow">
                             <div>
-                                <label class="field-label">
-                                    Tahun Terbit <span class="required-dot"></span>
+                                <label class="field-label" for="tahun_terbit">
+                                    Tahun Terbit <span class="req-dot"></span>
                                 </label>
                                 <input
                                     type="number"
@@ -560,7 +724,7 @@
                                     name="tahun_terbit"
                                     class="field-input @error('tahun_terbit') is-error @enderror"
                                     value="{{ old('tahun_terbit') }}"
-                                    placeholder="Contoh: 2005"
+                                    placeholder="2005"
                                     min="1900" max="2099"
                                     required>
                                 @error('tahun_terbit')
@@ -568,8 +732,8 @@
                                 @enderror
                             </div>
                             <div>
-                                <label class="field-label">
-                                    Stok <span class="required-dot"></span>
+                                <label class="field-label" for="stok">
+                                    Stok <span class="req-dot"></span>
                                 </label>
                                 <input
                                     type="number"
@@ -577,7 +741,7 @@
                                     name="stok"
                                     class="field-input @error('stok') is-error @enderror"
                                     value="{{ old('stok') }}"
-                                    placeholder="Contoh: 10"
+                                    placeholder="10"
                                     min="0"
                                     required>
                                 @error('stok')
@@ -590,29 +754,29 @@
                 </div>
 
                 <!-- Card: Cover Buku -->
-                <div class="form-card">
-                    <div class="form-card-header">
-                        <div class="form-card-header-icon">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <div class="fcard">
+                    <div class="fcard-head">
+                        <div class="fcard-head-icon">
+                            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                         </div>
                         <div>
-                            <div class="form-card-title">Cover Buku</div>
-                            <div class="form-card-subtitle">Unggah gambar sampul buku (opsional)</div>
+                            <div class="fcard-title">Cover Buku</div>
+                            <div class="fcard-sub">Unggah gambar sampul buku (opsional)</div>
                         </div>
                     </div>
-                    <div class="form-body">
+                    <div class="fcard-body">
                         <div class="upload-zone" id="uploadZone">
                             <input type="file" name="image" id="imageInput" accept="image/*">
                             <div id="uploadDefault">
                                 <div class="upload-icon">
-                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
                                 </div>
                                 <div class="upload-title">Klik untuk unggah cover</div>
                                 <div class="upload-sub">PNG, JPG, WEBP — maks. 2MB</div>
                             </div>
                             <div id="uploadSuccess" style="display:none;">
                                 <div class="upload-icon" style="background:#f0fdf4; border-color:#bbf7d0;">
-                                    <svg fill="none" stroke="#16a34a" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                    <svg fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                 </div>
                                 <div class="upload-title" style="color:#15803d;">File dipilih</div>
                                 <span class="upload-badge" id="fileName">—</span>
@@ -621,118 +785,86 @@
                         <div class="field-hint" style="margin-top:8px;">Gambar akan ditampilkan sebagai sampul buku di halaman daftar.</div>
                     </div>
 
-                    <div class="form-actions">
+                    <div class="fcard-foot">
                         <a href="{{ route('admin.buku.index') }}" class="btn-cancel">Batal</a>
                         <button type="submit" class="btn-submit">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
                             Simpan Buku
                         </button>
                     </div>
                 </div>
 
-            </form>
-        </div>
+                </form>
+            </div>
 
-        <!-- KOLOM KANAN: PREVIEW & TIPS -->
-        <div>
-            <!-- Preview Card -->
-            <div class="preview-card">
-                <div class="preview-card-header">
-                    <div class="preview-card-title">Pratinjau Buku</div>
-                </div>
-                <div class="preview-book">
-                    <div class="preview-cover" id="previewCover">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            <!-- KOLOM KANAN: PREVIEW & TIPS -->
+            <div class="right-col">
+
+                <!-- Preview Card -->
+                <div class="preview-card">
+                    <div class="preview-head">
+                        <div class="preview-label">Pratinjau Buku</div>
                     </div>
-                    <div class="preview-info">
-                        <div class="preview-title" id="previewJudul">Judul Buku</div>
-                        <div class="preview-author" id="previewPengarang">Nama Pengarang</div>
-                        <div class="preview-meta">
-                            <div class="preview-meta-row">
-                                <span class="preview-meta-key">Penerbit</span>
-                                <span class="preview-meta-val" id="previewPenerbit">—</span>
+                    <div class="preview-body">
+                        <div class="book-cover" id="previewCover">
+                            <svg viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                        </div>
+                        <div class="preview-info">
+                            <div class="preview-title" id="previewJudul">Judul Buku</div>
+                            <div class="preview-author" id="previewPengarang">Nama Pengarang</div>
+                            <div class="preview-meta">
+                                <div class="pmeta-row">
+                                    <span class="pmeta-key">Penerbit</span>
+                                    <span class="pmeta-val" id="previewPenerbit">—</span>
+                                </div>
+                                <div class="pmeta-row">
+                                    <span class="pmeta-key">Tahun</span>
+                                    <span class="pmeta-val" id="previewTahun">—</span>
+                                </div>
+                                <div class="pmeta-row">
+                                    <span class="pmeta-key">Stok</span>
+                                    <span class="pmeta-val" id="previewStok">—</span>
+                                </div>
+                                <div class="pmeta-row">
+                                    <span class="pmeta-key">Kategori</span>
+                                    <span class="pmeta-val" id="previewKategori">—</span>
+                                </div>
                             </div>
-                            
-                            <div class="preview-meta-row">
-                                <span class="preview-meta-key">Tahun</span>
-                                <span class="preview-meta-val" id="previewTahun">—</span>
-                            </div>
-                            <div class="preview-meta-row">
-                                <span class="preview-meta-key">Stok</span>
-                                <span class="preview-meta-val" id="previewStok">—</span>
-                            </div>
-                            <div class="form-group">
-    <label class="field-label">
-        Kategori <span class="required-dot"></span>
-    </label>
-
-    <select name="kategori_id"
-        class="field-input @error('kategori_id') is-error @enderror"
-        required>
-        
-        <option value="">-- Pilih Kategori --</option>
-
-        @foreach($kategori as $k)
-            <option value="{{ $k->id }}"
-                {{ old('kategori_id') == $k->id ? 'selected' : '' }}>
-                {{ $k->nama_kategori }}
-            </option>
-        @endforeach
-
-    </select>
-
-    @error('kategori_id')
-        <div class="field-error">{{ $message }}</div>
-    @enderror
-</div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Tips Card -->
-            <div class="tips-card">
-                <div class="tips-header">Tips Pengisian</div>
-                <div class="tips-body">
-                    <div class="tip-item">
-                        <div class="tip-dot"></div>
-                        <div class="tip-text">Judul dan pengarang ditulis sesuai yang tertera di sampul buku.</div>
-                    </div>
-                    <div class="tip-item">
-                        <div class="tip-dot"></div>
-                        <div class="tip-text">Gunakan tahun terbit edisi yang sedang tersedia di perpustakaan.</div>
-                    </div>
-                    <div class="tip-item">
-                        <div class="tip-dot"></div>
-                        <div class="tip-text">Cover idealnya berukuran 3:4 agar tampil proporsional di daftar buku.</div>
-                    </div>
-                    <div class="tip-item">
-                        <div class="tip-dot"></div>
-                        <div class="tip-text">Isi stok sesuai jumlah fisik buku yang tersedia saat ini.</div>
+                <!-- Tips Card -->
+                <div class="tips-card">
+                    <div class="tips-head">Tips Pengisian</div>
+                    <div class="tips-body">
+                        <div class="tip-item">
+                            <div class="tip-dot"></div>
+                            <div class="tip-text">Judul dan pengarang ditulis sesuai yang tertera di sampul buku.</div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-dot"></div>
+                            <div class="tip-text">Gunakan tahun terbit edisi yang sedang tersedia di perpustakaan.</div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-dot"></div>
+                            <div class="tip-text">Cover idealnya berukuran 3:4 agar tampil proporsional di daftar buku.</div>
+                        </div>
+                        <div class="tip-item">
+                            <div class="tip-dot"></div>
+                            <div class="tip-text">Isi stok sesuai jumlah fisik buku yang tersedia saat ini.</div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
- <div class="form-card" style="margin-bottom:16px;">
-    <div class="form-body">
+    </div><!-- /content-wrapper -->
 
-        <form id="importForm" action="{{ route('admin.buku.import') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-
-            <input type="file" name="file" id="excelFile" accept=".xlsx,.xls,.csv" required>
-
-            <button type="submit" class="btn-submit" style="margin-top:10px;">
-                Import Excel
-            </button>
-
-        </form>
-
-    </div>
-    </div>
 </main>
 
 <script>
-    /* Sidebar active link */
+    /* ── Sidebar active link ── */
     const currentPath = window.location.pathname;
     document.querySelectorAll('.sidebar-link').forEach(link => {
         if (link.getAttribute('href') === currentPath) {
@@ -741,35 +873,55 @@
         }
     });
 
-    /* Live preview */
-    function syncPreview(id, targetId, fallback) {
-        const el = document.getElementById(id);
+    /* ── Live preview (input & select) ── */
+    function syncPreview(inputId, targetId, fallback) {
+        const el = document.getElementById(inputId);
         const target = document.getElementById(targetId);
         if (!el || !target) return;
-        el.addEventListener('input', () => {
+        const ev = el.tagName === 'SELECT' ? 'change' : 'input';
+        el.addEventListener(ev, () => {
             target.textContent = el.value.trim() || fallback;
         });
     }
 
-    syncPreview('judul',       'previewJudul',      'Judul Buku');
-    syncPreview('pengarang',   'previewPengarang',  'Nama Pengarang');
-    syncPreview('penerbit',    'previewPenerbit',   '—');
-    syncPreview('tahun_terbit','previewTahun',      '—');
-    syncPreview('stok',        'previewStok',       '—');
+    syncPreview('judul',        'previewJudul',     'Judul Buku');
+    syncPreview('pengarang',    'previewPengarang', 'Nama Pengarang');
+    syncPreview('penerbit',     'previewPenerbit',  '—');
+    syncPreview('tahun_terbit', 'previewTahun',     '—');
+    syncPreview('stok',         'previewStok',      '—');
 
-    /* Cover upload preview */
-    const imageInput = document.getElementById('imageInput');
-    const uploadZone = document.getElementById('uploadZone');
+    /* Kategori select preview */
+    const katSelect = document.getElementById('kategori_id');
+    const katPreview = document.getElementById('previewKategori');
+    if (katSelect && katPreview) {
+        katSelect.addEventListener('change', () => {
+            const opt = katSelect.options[katSelect.selectedIndex];
+            katPreview.textContent = opt.value ? opt.text : '—';
+        });
+    }
+
+    /* ── Import file name display ── */
+    const importInput = document.getElementById('importFileInput');
+    const importName  = document.getElementById('importFileName');
+    if (importInput && importName) {
+        importInput.addEventListener('change', () => {
+            const f = importInput.files[0];
+            if (f) importName.textContent = f.name.length > 22 ? f.name.slice(0, 20) + '…' : f.name;
+        });
+    }
+
+    /* ── Cover upload preview ── */
+    const imageInput   = document.getElementById('imageInput');
+    const uploadZone   = document.getElementById('uploadZone');
     const uploadDefault = document.getElementById('uploadDefault');
     const uploadSuccess = document.getElementById('uploadSuccess');
-    const fileNameEl = document.getElementById('fileName');
+    const fileNameEl   = document.getElementById('fileName');
     const previewCover = document.getElementById('previewCover');
 
     imageInput.addEventListener('change', function () {
         const file = this.files[0];
         if (!file) return;
 
-        /* Update zone */
         uploadZone.classList.add('has-file');
         uploadDefault.style.display = 'none';
         uploadSuccess.style.display = 'block';
@@ -777,7 +929,6 @@
             ? file.name.substring(0, 22) + '…'
             : file.name;
 
-        /* Update preview cover */
         const reader = new FileReader();
         reader.onload = (e) => {
             previewCover.innerHTML = `<img src="${e.target.result}" alt="Cover preview">`;

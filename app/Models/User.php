@@ -44,7 +44,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Transaksi::class, 'user_id');
     }
-
+    public function pinjamanAktif()
+    {
+        return $this->hasMany(Transaksi::class, 'user_id')
+            ->whereIn('status', ['pending', 'dipinjam']);
+    }
     /*
     |--------------------------------------------------------------------------
     | ROLE CHECKER
